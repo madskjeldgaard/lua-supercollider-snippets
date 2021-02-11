@@ -18,3 +18,9 @@ See all snippets available:
 `lua require'supercollider-snippets.utils'.print_all()`
 
 Type one of these names and expand using whatever key you have mapped in snippets.nvim
+
+## Options
+
+```lua 
+vim.g.default_sequence_length = 4
+```

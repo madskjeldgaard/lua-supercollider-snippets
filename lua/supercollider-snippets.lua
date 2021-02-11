@@ -1,5 +1,6 @@
 local utils = require'supercollider-snippets/utils'
 local pats = require'supercollider-snippets/patterns'
+local opts = require'supercollider-snippets/opts'
 
 local snippets = {
 	b = [[${1:b} = Buffer.read(${3:s}, "${2:~/testsound/harmonica1.wav}".asAbsolutePath);$0]];
@@ -8,29 +9,35 @@ local snippets = {
 	randlisti = utils.rand_var_list(math.random(3,12), "[", 0, 'i');
 	randlistfr = utils.rand_var_list(math.random(3,16), "[", 0, 'fr');
 
-	pseq = pats.pseq(4);
-	pseqi = pats.pseq(4, 'i');
-	pseqfr = pats.pseq(4, 'fr');
+	pseq = pats.pseq(opts.default_sequence_length);
+	pseqi = pats.pseq(opts.default_sequence_length, 'i');
+	pseqfr = pats.pseq(opts.default_sequence_length, 'fr');
+	pseqr = pats.pseq(opts.default_sequence_length, 'r');
 
-	prand = pats.prand(4);
-	prandi = pats.prand(4, 'i');
-	prandfr = pats.prand(4, 'fr');
+	prand = pats.prand(opts.default_sequence_length);
+	prandi = pats.prand(opts.default_sequence_length, 'i');
+	prandfr = pats.prand(opts.default_sequence_length, 'fr');
+	prandr = pats.prand(opts.default_sequence_length, 'r');
 
-	pxrand = pats.pxrand(4);
-	pxrandi = pats.pxrand(4, 'i');
-	pxrandfr = pats.pxrand(4, 'fr');
+	pxrand = pats.pxrand(opts.default_sequence_length);
+	pxrandi = pats.pxrand(opts.default_sequence_length, 'i');
+	pxrandfr = pats.pxrand(opts.default_sequence_length, 'fr');
+	pxrandr = pats.pxrand(opts.default_sequence_length, 'r');
 
-	pshuf = pats.pshuf(4);
-	pshufi = pats.pshuf(4, 'i');
-	pshuffr = pats.pshuf(4, 'fr');
+	pshuf = pats.pshuf(opts.default_sequence_length);
+	pshufi = pats.pshuf(opts.default_sequence_length, 'i');
+	pshuffr = pats.pshuf(opts.default_sequence_length, 'fr');
+	pshufr = pats.pshuf(opts.default_sequence_length, 'r');
 
-	pwrand = pats.pwrand(4);
-	pwrandi = pats.pwrand(4, 'i');
-	pwrandfr = pats.pwrand(4, 'fr');
+	pwrand = pats.pwrand(opts.default_sequence_length);
+	pwrandi = pats.pwrand(opts.default_sequence_length, 'i');
+	pwrandfr = pats.pwrand(opts.default_sequence_length, 'fr');
+	pwrandr = pats.pwrand(opts.default_sequence_length, 'r');
 
-	pseg = pats.pseg(3);
-	psegi = pats.pseg(3, 'i');
-	psegfr = pats.pseg(3, 'fr');
+	pseg = pats.pseg(opts.default_sequence_length);
+	psegi = pats.pseg(opts.default_sequence_length, 'i');
+	psegfr = pats.pseg(opts.default_sequence_length, 'fr');
+	psegr = pats.pseg(opts.default_sequence_length, 'r');
 
 }
 

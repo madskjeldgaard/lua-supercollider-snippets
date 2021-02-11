@@ -101,27 +101,33 @@ function M.rand_var_list(maxLen, wrapListIn, offset, type)
 		local numDecimals = 2
 		local default = ""
 
-		-- Floats
+		-- Random float
 		if type == "f" then
 			local val = math.random()
 			default = string.format("%." .. numDecimals .. "f", val)
 
-			-- Integer
+			-- Random integer
 		elseif type == "i" then
 			local val = math.random(10)
 			default = string.format("%i", val)
 
-			-- Fraction
+			-- Random fraction
 		elseif type == "fr" then
-			local val = math.random(10)
-			local div = math.random(10)
+			local val = math.random(1,10)
+			local div = math.random(1,10)
 
 			-- Make sure val and div are not the same
 			while val == div do
-				div = math.random(10)
+				div = math.random(1,10)
 			end
 
 			default = string.format("%i/%i", val, div)
+
+			-- Random reciprocal ( eg 1/5, 1/7 etc )
+		elseif type =="r" then
+			local val = math.random(2,10)
+			default = string.format("%i/%i", 1, val)
+
 		else
 			-- Default to floats
 			local val = math.random()
