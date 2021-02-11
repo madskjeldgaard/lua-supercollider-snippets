@@ -1,5 +1,13 @@
 local M = {}
 
+function M.print_all()
+	print("These are the supercollider snippets available. Type the name and expand")
+	print("---")
+	for k,v in pairs(require'supercollider-snippets') do
+		print(k)
+	end
+end
+
 function M.append_table(table1, table2)
 	for _,v in pairs(table2) do
 		table.insert(table1, v)

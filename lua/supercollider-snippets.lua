@@ -9,7 +9,6 @@ local snippets = {
 	pxrand = pats.pxrand(4);
 	pshuf = pats.pshuf(4);
 	pwrand = pats.pwrand(3);
-
 }
 
 return snippets
