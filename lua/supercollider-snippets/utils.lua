@@ -93,13 +93,40 @@ end
 
 -- Create list of random variables
 -- Offset is used to offset the variable numbers
-function M.rand_var_list(maxLen, wrapListIn, offset)
+function M.rand_var_list(maxLen, wrapListIn, offset, type)
 	local t = {}
 
 	for i=1, maxLen do
-		local val = math.random()
 		local is_input = true
 		local numDecimals = 2
+		local default = ""
+
+		-- Floats
+		if type == "f" then
+			local val = math.random()
+			default = string.format("%." .. numDecimals .. "f", val)
+
+			-- Integer
+		elseif type == "i" then
+			local val = math.random(10)
+			default = string.format("%i", val)
+
+			-- Fraction
+		elseif type == "fr" then
+			local val = math.random(10)
+			local div = math.random(10)
+
+			-- Make sure val and div are not the same
+			while val == div do
+				div = math.random(10)
+			end
+
+			default = string.format("%i/%i", val, div)
+		else
+			-- Default to floats
+			local val = math.random()
+			default = string.format("%." .. numDecimals .. "f", val)
+		end
 
 		offset = offset or 0
 		local transform = function(sn)
@@ -115,7 +142,7 @@ function M.rand_var_list(maxLen, wrapListIn, offset)
 		local index = i + offset
 		local item = M.var(
 			index,
-			string.format("%." .. numDecimals .. "f", val),
+			default,
 			is_input,
 			string.format("item %i", index),
 			transform
