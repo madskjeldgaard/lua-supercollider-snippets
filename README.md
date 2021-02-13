@@ -22,5 +22,9 @@ Type one of these names and expand using whatever key you have mapped in snippet
 ## Options
 
 ```lua 
+-- Length of random sequences
 vim.g.default_sequence_length = 4
+
+-- Newline items in lists
+vim.g.supercollider_snippet_comma_newline = 1
 ```

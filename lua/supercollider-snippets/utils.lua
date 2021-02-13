@@ -1,24 +1,53 @@
+local sniputils = require'snippets.utils'
 local M = {}
-
-function M.print_all()
-	print("These are the supercollider snippets available. Type the name and expand")
-	print("---")
-	for k,v in pairs(require'supercollider-snippets') do
-		print(k)
-	end
+--
+-- Check if string ends with something
+local function ends_with(str, ending)
+   return ending == "" or str:sub(-#ending) == ending
 end
 
+
+-- Append table to end of table
 function M.append_table(table1, table2)
 	for _,v in pairs(table2) do
 		table.insert(table1, v)
 	end
 end
 
--- Check if string ends with something
-local function ends_with(str, ending)
-   return ending == "" or str:sub(-#ending) == ending
+-- Insert comma into table
+-- A global setting controls wether it should be followed by a newline
+local newline = vim.g.supercollider_snippet_comma_newline or 1
+function M.insert_comma(table1)
+	local comma
+	if newline == 1 then
+		comma = "," .. "\n"
+	else
+		comma = ","
+	end
+
+	table.insert(table1, comma)
 end
 
+function M.indented(str)
+	local line = vim.api.nvim_get_current_line()
+	local indent = line:match("^%s+") or ""
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local pos_on_line = cursor[2]
+
+	-- if ends_with(line, "%S") then
+		return indent .. str
+	-- else
+		-- return str
+	-- end
+end
+
+function M.print_all()
+	print("These are the supercollider snippets available. Type the name and expand")
+	print("---")
+	for k,_ in pairs(require'supercollider-snippets') do
+		print(k)
+	end
+end
 -- Basename of file (without suffix)
 function M.get_basename()
 	return vim.fn.expand("%:t:r")
@@ -37,28 +66,6 @@ end
 -- Basename capitalized
 function M.capitalized_base()
 	return M.capitalize(M.get_basename())
-end
-
--- Add newline
-function M.nl(s)
-	if type(s) == "table" then
-		return s.v .. "\n"
-	elseif type(s) == "string" then
-		return s .. "\n"
-	else
-		return nil
-	end
-end
-
--- Add tab
-function M.t(s)
-	if type(s) == "table" then
-		return "\t" .. s.v
-	elseif type(s) == "string" then
-		return "\t" .. s
-	else
-		return nil
-	end
 end
 
 -- Create a snippets.nvim variable
@@ -90,6 +97,7 @@ function M.wrap_table_in(t, wrapperChar)
 
 	return t
 end
+
 
 -- Create list of random variables
 -- Offset is used to offset the variable numbers
@@ -136,12 +144,23 @@ function M.rand_var_list(maxLen, wrapListIn, offset, type)
 
 		offset = offset or 0
 		local transform = function(sn)
-			if ends_with(sn.v, "r") then
-				local var = sn.v:sub(1,-2)
+			local nl = "\t"
+			local nl_after = ""
 
-				return "Rest(" .. var .. ")"
+			if i == 1 then
+				nl = "\n\t"
+			end
+
+			-- if i == maxLen then
+			-- 	nl_after = "\n"
+			-- end
+
+			if ends_with(sn.v, ",r") then
+				local var = sn.v:sub(1,-3)
+
+				return nl .. M.indented("Rest(" .. var .. ")") .. nl_after
 			else
-				return sn.v
+				return nl .. M.indented(sn.v) .. nl_after
 			end
 		end
 
@@ -153,11 +172,12 @@ function M.rand_var_list(maxLen, wrapListIn, offset, type)
 			string.format("item %i", index),
 			transform
 		)
+
 		table.insert(t, item)
 
 		-- No comma at end of list
 		if i ~= maxLen then
-			table.insert(t, ", ")
+			M.insert_comma(t)
 		end
 	end
 
@@ -185,4 +205,8 @@ function M.wrap_in_pat(t, patternClass)
 	table.insert(t, repeats)
 	table.insert(t, ")")
 end
+
+
+
+
 return M
