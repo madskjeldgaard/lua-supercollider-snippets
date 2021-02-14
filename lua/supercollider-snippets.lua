@@ -52,7 +52,6 @@ local snippets = {
 
 	-- Ndefs
 	input = scsnips.ndefinput;
-
 }
 
 return snippets
