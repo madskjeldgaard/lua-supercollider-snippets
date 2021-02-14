@@ -1,6 +1,7 @@
 local utils = require'supercollider-snippets/utils'
 local pats = require'supercollider-snippets/patterns'
 local opts = require'supercollider-snippets/opts'
+local scsnips = require'supercollider-snippets/scsnips'
 
 local snippets = {
 	b = [[${1:b} = Buffer.read(${3:s}, "${2:~/testsound/harmonica1.wav}".asAbsolutePath);$0]];
@@ -9,6 +10,7 @@ local snippets = {
 	randlisti = utils.rand_var_list(math.random(3,12), "[", 0, 'i');
 	randlistfr = utils.rand_var_list(math.random(3,16), "[", 0, 'fr');
 
+	-- Pattern stuff
 	pseq = pats.pseq(opts.default_sequence_length);
 	pseqi = pats.pseq(opts.default_sequence_length, 'i');
 	pseqfr = pats.pseq(opts.default_sequence_length, 'fr');
@@ -38,6 +40,19 @@ local snippets = {
 	psegi = pats.pseg(opts.default_sequence_length, 'i');
 	psegfr = pats.pseg(opts.default_sequence_length, 'fr');
 	psegr = pats.pseg(opts.default_sequence_length, 'r');
+
+	-- Midi stuff
+	noteon = scsnips.mididefNoteon;
+	noteoff = scsnips.mididefNoteoff;
+	cc = scsnips.mididefcc;
+
+	-- Synthdef stuff
+	sd = scsnips.synthdef;
+	synthdef = scsnips.synthdef;
+
+	-- Ndefs
+	["in"] = scsnips.ndefinput;
+	input = scsnips.ndefinput;
 
 }
 
