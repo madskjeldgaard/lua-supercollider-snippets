@@ -51,7 +51,6 @@ local snippets = {
 	synthdef = scsnips.synthdef;
 
 	-- Ndefs
-	["in"] = scsnips.ndefinput;
 	input = scsnips.ndefinput;
 
 }
