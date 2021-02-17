@@ -55,4 +55,17 @@ function M.pseg(len, type, offset)
 	return t
 end
 
+M.pdef = {
+    "Pdef('",
+    { order=1, id="name", default=function()return os.date('%H_%M_%S')end, is_input=true },
+    "', {\n\tPbind(*[\n\t\tinstrument: '",
+    { order=2, id="instrument", default="default", is_input=true },
+    "'},\n\t\tdur: ",
+    { order=3, id="dur", default="1/4", is_input=true },
+    ",\n\t\t",
+    { order=0, id=0 },
+    "\n\t]\n)})",
+    { order=4, id="method", default=".play(quant:0)", is_input=true },
+}
+
 return M
