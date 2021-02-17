@@ -11,6 +11,8 @@ local snippets = {
 	randlistfr = utils.rand_var_list(math.random(3,16), "[", 0, 'fr');
 
 	-- Pattern stuff
+    pdef = pats.pdef;
+
 	pseq = pats.pseq(opts.default_sequence_length);
 	pseqi = pats.pseq(opts.default_sequence_length, 'i');
 	pseqfr = pats.pseq(opts.default_sequence_length, 'fr');
@@ -52,6 +54,9 @@ local snippets = {
 
 	-- Ndefs
 	input = scsnips.ndefinput;
+
+    -- Bus snips
+    busfactory = scsnips.create_top_envir_busses;
 }
 
 return snippets
