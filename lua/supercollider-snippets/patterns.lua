@@ -3,7 +3,7 @@ local M = {}
 
 function M.pseq(len, type, offset)
 	offset = offset or 0
-	local t = utils.rand_var_list(len, "[", offset, type)
+	local t = utils.rand_var_list(len, "[", 1, type, offset)
 	utils.wrap_in_pat(t, "Pseq")
 	return t
 end
