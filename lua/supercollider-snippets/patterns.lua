@@ -3,7 +3,7 @@ local M = {}
 
 function M.pseq(len, type, offset)
 	offset = offset or 0
-	local t = utils.rand_var_list(len, "[", offset, type)
+	local t = utils.rand_var_list(len, "[", 1, type, offset)
 	utils.wrap_in_pat(t, "Pseq")
 	return t
 end
@@ -54,5 +54,18 @@ function M.pseg(len, type, offset)
 	utils.wrap_in_pat(t, "Pseg")
 	return t
 end
+
+M.pdef = {
+    "Pdef('",
+    { order=1, id="name", default=function()return os.date('%H_%M_%S')end, is_input=true },
+    "', {\n\tPbind(*[\n\t\tinstrument: '",
+    { order=2, id="instrument", default="default", is_input=true },
+    "'},\n\t\tdur: ",
+    { order=3, id="dur", default="1/4", is_input=true },
+    ",\n\t\t",
+    { order=0, id=0 },
+    "\n\t]\n)})",
+    { order=4, id="method", default=".play(quant:0)", is_input=true },
+}
 
 return M
