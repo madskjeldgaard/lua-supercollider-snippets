@@ -68,4 +68,50 @@ M.pdef = {
     { order=4, id="method", default=".play(quant:0)", is_input=true },
 }
 
+M.swing_routine = [[
+~swingify = Prout({ |ev|
+    var now, nextTime = 0, thisShouldSwing, nextShouldSwing = false, adjust;
+    while { ev.notNil } {
+            now = nextTime;
+            nextTime = now + ev.delta;
+            thisShouldSwing = nextShouldSwing;
+            nextShouldSwing = ((nextTime absdif: nextTime.round(ev[\swingBase])) <= (ev[\swingThreshold] ? 0)) and: {
+            (nextTime / ev[\swingBase]).round.asInteger.odd
+        };
+        adjust = ev[\swingBase] * ev[\swingAmount];
+        if(thisShouldSwing) {
+            ev[\timingOffset] = (ev[\timingOffset] ? 0) + adjust;
+            if(nextShouldSwing.not) {
+                ev[\sustain] = ev.use { ~sustain.value } - adjust;
+            };
+        } {
+            if(nextShouldSwing) {
+                ev[\sustain] = ev.use { ~sustain.value } + adjust;
+            };
+        };
+        ev = ev.yield;
+    };
+});
+]];
+
+M.swing_pattern = {
+    "TempoClock.tempo = ", { order=1, id="tempo", default="90", is_input=true }, " / 120;\n",
+    "Pdef('", { order=2, id="name", default="swing", is_input=true }, "',\n\tPpar([\n\t\tPseq([\n",
+    "\t\t\tPchain(\n\t\t\t\t~swingify,\n\t\t\t\tPbind(\n\t\t\t\t\t\\instrument, '",
+    { order=3, id="instrument", default="default", is_input=true }, "',\n",
+    "\t\t\t\t\t", "\\out, ", { order=4, id="out", default="~bus_1", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\dur, ", { order=5, id="duration", default="Pwhite(0.1)", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\legato, ", { order=6, id="legato", default="1.0", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\degree, ", { order=7, id="degree", default="Pseq((0..12), inf)", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\octave, ", { order=8, id="octave", default="Pseq([3,4,5,4,5], inf)", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\scale, ", { order=9, id="scale", default="Scale.yu", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\pan, Pwhite(-1) * ", { order=10, id="random pan amount", default="1/4", is_input=true }, ",\n",
+    "\t\t\t\t\t", "\\amp, ", { order=11, id="amplitude", default="Pwhite(0.6,0.7)", is_input=true }, ",\n",
+    "\t\t\t\t),\n",
+    "\t\t\t\t(swingBase: 0.25, swingAmount: ", { order=12, id="swing amount", default="0.1", is_input=true }, ")\n",
+    "\t\t\t),\n",
+    "\t\t\tPfuncn({ q.stop; Event.silent(0) }, 1)", "\n",
+    "\t\t])\n\t])\n).play(quant: ", { order=13, id="quant", default="1/8", is_input=true }, ");"
+};
+
 return M
