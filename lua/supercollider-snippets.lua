@@ -57,6 +57,10 @@ local snippets = {
 
     -- Bus snips
     busfactory = scsnips.create_top_envir_busses;
+
+    -- register magic
+    tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
+    tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
 }
 
 return snippets
