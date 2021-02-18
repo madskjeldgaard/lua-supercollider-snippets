@@ -11,7 +11,7 @@ local snippets = {
 	randlistfr = utils.rand_var_list(math.random(3,16), "[", 0, 'fr');
 
 	-- Pattern stuff
-    pdef = pats.pdef;
+	pdef = pats.pdef;
 
 	pseq = pats.pseq(opts.default_sequence_length);
 	pseqi = pats.pseq(opts.default_sequence_length, 'i');
@@ -43,8 +43,9 @@ local snippets = {
 	psegfr = pats.pseg(opts.default_sequence_length, 'fr');
 	psegr = pats.pseg(opts.default_sequence_length, 'r');
 
-    swingroutine = pats.swing_routine;
-    swingpattern = pats.swing_pattern;
+	swingroutine = pats.swing_routine;
+	swingpattern = pats.swing_pattern;
+	swingpat = pats.swing_pattern;
 
 	-- Midi stuff
 	noteon = scsnips.mididefNoteon;
@@ -58,12 +59,13 @@ local snippets = {
 	-- Ndefs
 	input = scsnips.ndefinput;
 
-    -- Bus snips
-    busfactory = scsnips.create_top_envir_busses;
+	-- Bus snips
+	busfactory = scsnips.create_top_envir_busses;
+	busfact = scsnips.create_top_envir_busses;
 
-    -- register magic
-    tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
-    tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
+	-- register magic: These will use whatever is in your clipboard from the last time you yanked/deleted something
+	tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
+	tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
 }
 
 return snippets
