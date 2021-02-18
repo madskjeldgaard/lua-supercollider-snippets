@@ -51,6 +51,7 @@ local snippets = {
 	noteon = scsnips.mididefNoteon;
 	noteoff = scsnips.mididefNoteoff;
 	cc = scsnips.mididefcc;
+	modality = scsnips.modality_midi_desc;
 
 	-- Synthdef stuff
 	sd = scsnips.synthdef;

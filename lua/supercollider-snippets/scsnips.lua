@@ -23,6 +23,34 @@ Snippets.mididefcc = [[MIDIdef.cc(${1:\\name}, {
 	${2:val.postln}
 },ccNum: ${3:64}, chan: ${4:0})${5:.fix};]];
 
+Snippets.modality_midi_desc = [[
+// Modality description for $2, a $4 device
+~${1:descInput} = (
+idInfo: "${2:Teensy MIDI}",
+deviceName: "${3:$2}",
+protocol: '${4:midi}',
+elementsDesc: (
+elements: 
+	// $5 $6s
+	${5:10}.collect{|$6Num|
+	(
+	key: "${12| S[6]:sub(1,2)}%".format($6Num).asSymbol,
+	type: '${6:knob}',
+	spec: '${7:midiCC}',
+	midiMsgType: '${8:cc}',
+	midiChan: ${9:0},
+	midiNum: ${10:$6Num},
+	ioType: '${11:in}'
+	)
+	}
+)
+);
+
+m = MKtl(\test, ~$1);
+m.trace(${13:true});
+$0
+]];
+
 -- Ndefs
 Snippets.ndefinput = [[Ndef(${1:\\name}, {|in=0|
     SoundIn.ar(in)
