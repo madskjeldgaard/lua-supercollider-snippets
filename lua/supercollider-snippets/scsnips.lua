@@ -75,4 +75,38 @@ Snippets.create_top_envir_busses = {
     { order=0, id=0 }
 };
 
+-- SynthDef.wrap
+Snippets.synthdefwrap = [[SynthDef.wrap(${1:~funcName}, prependArgs: [${2:sig}])]];
+
+-- Custom event types
+Snippets.eventType = [[Event.addEventType(\\${1:happyEvent}, { |server|
+    ~octave = [5, 6, 7]; // always play three octaves
+    ~detune = 10.0.rand2; // always play a bit out of tune
+    ~type = \note; // now set type to a different one
+    currentEnvironment.play;
+});]];
+
+Snippets.synthdefx = [[ SynthDef.new(\\${1:fxname}, {|out| 
+	var in = In.ar(out, numChannels: ${2:2});
+	var sig = ${3:HPF.ar(in)};
+
+	ReplaceOut.ar(out, sig);
+}).add;]]
+
+Snippets.vstplugin = [[(
+SynthDef(\\${1:vstplugin}, { arg bus;
+	var numChannels = ${2:2};
+	ReplaceOut.ar(bus, VSTPlugin.ar(In.ar(bus, numChannels), numChannels));
+}).add;
+)
+
+// Build cache
+VSTPlugin.search;
+
+${3:~fx} = VSTPluginController(Synth(\\$1, [\bus, ${4:0}])).open("${5:TEOTE}");
+$3.gui;
+]];
+
+
+
 return Snippets

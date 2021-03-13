@@ -67,6 +67,16 @@ local snippets = {
 	-- register magic: These will use whatever is in your clipboard from the last time you yanked/deleted something
 	tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
 	tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
+
+	wrap = scsnips.synthdefwrap;
+	synthdefwrap = scsnips.synthdefwrap;
+
+	fx = scsnips.synthdefx;
+
+	eventtype = scsnips.eventType;
+
+	vst = scsnips.vstplugin;
+	vstplugin = scsnips.vstplugin;
 }
 
 return snippets
