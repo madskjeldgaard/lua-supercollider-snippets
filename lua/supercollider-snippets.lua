@@ -82,6 +82,7 @@ local snippets = {
 
 	vst = scsnips.vstplugin;
 	vstplugin = scsnips.vstplugin;
+	["\\"] = scsnips["\\"];
 }
 
 return snippets
