@@ -108,5 +108,26 @@ $3.gui;
 ]];
 
 
+Snippets.ndef = [[Ndef(\\${1:name}, { 
+	${2:SinOsc.ar(${3:200})} 
+})${4:.play}]];
+
+Snippets.ndefplaybuf = [[Ndef(\\${1:name}, { 
+	var buffer = \buffer.kr(b);
+	var env = Env.perc(\atk.kr(0.01), \rel.kr(0.99)).kr(gate: \t_gate.kr(1), timeScale: \dur.kr(1), doneAction: 0);
+	var sig = PlayBuf.ar(
+		numChannels: ${2:2},  
+		bufnum: buffer,  
+		rate: \rate.kr(${3:1}, spec:[-4.0,4.0]) * BufRateScale.kr(buffer),  
+		trigger: 1.0,  
+		startPos: \start.kr(${4:0}, spec: [0.0,1.0]) * BufFrames.kr(buffer),  
+		loop: \loop.kr(${5:1}),  
+		doneAction: 0
+	);
+
+	sig * env * \amp.kr(${6:0.5})
+})${7:.play}]];
+
+
 
 return Snippets
