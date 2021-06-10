@@ -75,7 +75,6 @@ Snippets.create_top_envir_busses = {
     { order=0, id=0 }
 };
 
---
 -- SynthDef.wrap
 Snippets.synthdefwrap = [[SynthDef.wrap(${1:~funcName}, prependArgs: [${2:sig}])]];
 
