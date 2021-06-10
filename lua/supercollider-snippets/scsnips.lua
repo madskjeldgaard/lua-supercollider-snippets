@@ -23,6 +23,34 @@ Snippets.mididefcc = [[MIDIdef.cc(${1:\\name}, {
 	${2:val.postln}
 },ccNum: ${3:64}, chan: ${4:0})${5:.fix};]];
 
+Snippets.modality_midi_desc = [[
+// Modality description for $2, a $4 device
+~${1:descInput} = (
+idInfo: "${2:Teensy MIDI}",
+deviceName: "${3:$2}",
+protocol: '${4:midi}',
+elementsDesc: (
+elements: 
+	// $5 $6s
+	${5:10}.collect{|$6Num|
+	(
+	key: "${12| S[6]:sub(1,2)}%".format($6Num).asSymbol,
+	type: '${6:knob}',
+	spec: '${7:midiCC}',
+	midiMsgType: '${8:cc}',
+	midiChan: ${9:0},
+	midiNum: ${10:$6Num},
+	ioType: '${11:in}'
+	)
+	}
+)
+);
+
+m = MKtl(\test, ~$1);
+m.trace(${13:true});
+$0
+]];
+
 -- Ndefs
 Snippets.ndefinput = [[Ndef(${1:\\name}, {|in=0|
     SoundIn.ar(in)
@@ -47,6 +75,38 @@ Snippets.create_top_envir_busses = {
     { order=0, id=0 }
 };
 
+--
+-- SynthDef.wrap
+Snippets.synthdefwrap = [[SynthDef.wrap(${1:~funcName}, prependArgs: [${2:sig}])]];
+
+-- Custom event types
+Snippets.eventType = [[Event.addEventType(\\${1:happyEvent}, { |server|
+    ~octave = [5, 6, 7]; // always play three octaves
+    ~detune = 10.0.rand2; // always play a bit out of tune
+    ~type = \note; // now set type to a different one
+    currentEnvironment.play;
+});]];
+
+Snippets.synthdefx = [[ SynthDef.new(\\${1:fxname}, {|out| 
+	var in = In.ar(out, numChannels: ${2:2});
+	var sig = ${3:HPF.ar(in)};
+
+	ReplaceOut.ar(out, sig);
+}).add;]]
+
+Snippets.vstplugin = [[(
+SynthDef(\\${1:vstplugin}, { arg bus;
+	var numChannels = ${2:2};
+	ReplaceOut.ar(bus, VSTPlugin.ar(In.ar(bus, numChannels), numChannels));
+}).add;
+)
+
+// Build cache
+VSTPlugin.search;
+
+${3:~fx} = VSTPluginController(Synth(\\$1, [\bus, ${4:0}])).open("${5:TEOTE}");
+$3.gui;
+]];
 
 Snippets.oscdef = {
     "OSCdef('",
