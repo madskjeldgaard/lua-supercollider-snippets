@@ -107,6 +107,22 @@ ${3:~fx} = VSTPluginController(Synth(\\$1, [\bus, ${4:0}])).open("${5:TEOTE}");
 $3.gui;
 ]];
 
+Snippets.oscdef = {
+    "OSCdef('",
+    { order=1, id="name", default=function()return os.date('%H_%M_%S')end, is_input=true },
+    "', {arg msg, time, addr, recv_port;",
+    "\n\tvar data_a = msg[1];",
+    "\n\tvar data_b = msg[2];",
+    "\n\tvar data_c = msg[3];",
+    "\n\tdata_a.postln; data_b.postln; data_c.postln;",
+    "\n", { order=0, id=0 },
+    "\n}.inEnvir(",{ order=3, id="envir attach", default="topEnvironment", is_input=true}, ")",
+    ", '/", { order=2, id="path", default="test", is_input=true }, "')", { order=4, id="enable/disable", default=".enable", is_input=true }, ";"
+}
+
+Snippets.osc_sendmsg = {
+	"NetAddr(\"",{order=1, id="ip addr", default="localhost", is_input=true }, "\", ",  { order=2, id="port", default="57120", is_input=true }, ").sendMsg('/", { order=3, id="msg path", default="hvad/satan", is_input=true }, "', ", { order=4, id="value", default="666.rand", is_input=true }, ");"
+}
 
 Snippets.ndef = [[Ndef(\\${1:name}, { 
 	${2:SinOsc.ar(${3:200})} 
@@ -127,7 +143,5 @@ Snippets.ndefplaybuf = [[Ndef(\\${1:name}, {
 
 	sig * env * \amp.kr(${6:0.5})
 })${7:.play}]];
-
-
 
 return Snippets
