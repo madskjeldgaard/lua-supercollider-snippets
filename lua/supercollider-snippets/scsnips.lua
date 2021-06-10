@@ -117,7 +117,7 @@ Snippets.oscdef = {
     "\n\tdata_a.postln; data_b.postln; data_c.postln;",
     "\n", { order=0, id=0 },
     "\n}.inEnvir(",{ order=3, id="envir attach", default="topEnvironment", is_input=true}, ")",
-    ", '/", { order=2, id="path", default="test", is_input=true }, "');"
+    ", '/", { order=2, id="path", default="test", is_input=true }, "')", { order=4, id="enable/disable", default=".enable", is_input=true }, ";"
 }
 
 Snippets.osc_sendmsg = {
