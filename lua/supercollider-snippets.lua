@@ -64,6 +64,9 @@ local snippets = {
     -- register magic
     tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
     tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
+
+    oscdef = scsnips.oscdef;
+    sendmsg = scsnips.osc_sendmsg;
 }
 
 return snippets
