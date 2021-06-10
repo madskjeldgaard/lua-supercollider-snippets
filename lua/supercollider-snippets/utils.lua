@@ -48,6 +48,7 @@ function M.print_all()
 		print(k)
 	end
 end
+
 -- Basename of file (without suffix)
 function M.get_basename()
 	return vim.fn.expand("%:t:r")

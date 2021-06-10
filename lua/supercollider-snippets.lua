@@ -68,6 +68,11 @@ local snippets = {
 	tosynthdef = [[SynthDef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
 	tondef = [[Ndef(\yanked_${=os.date('%H_%M_%S')}, {${=vim.fn.getreg('"')}}).play;]];
 
+	nd = scsnips.ndef;
+	ndef = scsnips.ndef;
+	nplaybuf = scsnips.ndefplaybuf;
+
+
 	wrap = scsnips.synthdefwrap;
 	synthdefwrap = scsnips.synthdefwrap;
 
