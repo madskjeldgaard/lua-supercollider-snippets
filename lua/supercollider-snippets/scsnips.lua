@@ -144,4 +144,41 @@ Snippets.ndefplaybuf = [[Ndef(\\${1:name}, {
 	sig * env * \amp.kr(${6:0.5})
 })${7:.play}]];
 
+Snippets.mainfx = [[(
+ProxyChain.add3(
+    srcName: \jpverb, 
+	\filter -> { |in| 
+		JPverb.ar(
+			in: in,  
+			t60: \time.kr(10),  
+			damp: \damp.kr(0.25),  
+			size: \size.kr(1),  
+			earlyDiff: 0.707,  
+			modDepth: \modDepth.kr(0.25),  
+			modFreq: \modFreq.kr(0.1, spec: [0.0,10.0]),  
+			low: 1.0,  
+			mid: 1.0,  
+			high: 1.0,  
+			lowcut: 500.0,  
+			highcut: 2000.0
+		);
+	},
+	level: 0.1
+);
+
+m = MainFX.new(
+	server: s,
+	numChannels: ${1: 2},
+	slotNames: [\jpverb],
+	busIndex: 0
+);
+
+m.add(\jpverb, 0.2);
+
+g = m.gui;
+)
+]];
+
+Snippets.masterfx = Snippets.mainfx;
+
 return Snippets
