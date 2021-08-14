@@ -196,11 +196,11 @@ Snippets.class = [[${1:ClassName} {
 Snippets.unit = [[${1:TestYourClass} : UnitTest {
     setUp {
         // this will be called before each test
-		${2:}
+		${2}
     }
     tearDown {
         // this will be called after each test
-		${3:}
+		${3}
     }
 
     test_yourMethod {
