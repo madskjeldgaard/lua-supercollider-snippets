@@ -181,7 +181,7 @@ g = m.gui;
 
 Snippets.masterfx = Snippets.mainfx;
 
-Snippets["class"] = [[${1:ClassName} {
+Snippets.class = [[${1:ClassName} {
 
     *new { | ${2:arga, argb, argc} |
         ^super.new.init($2)
@@ -193,7 +193,7 @@ Snippets["class"] = [[${1:ClassName} {
 }
 ]];
 
-Snippets["unit"] = [[${1:TestYourClass} : UnitTest {
+Snippets.unit = [[${1:TestYourClass} : UnitTest {
     setUp {
         // this will be called before each test
 		${2:}
@@ -209,6 +209,6 @@ Snippets["unit"] = [[${1:TestYourClass} : UnitTest {
 	}
 }
 
-]]
+]];
 
 return Snippets
