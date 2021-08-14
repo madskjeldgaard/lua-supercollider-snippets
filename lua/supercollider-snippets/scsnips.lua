@@ -181,4 +181,34 @@ g = m.gui;
 
 Snippets.masterfx = Snippets.mainfx;
 
+Snippets["class"] = [[${1:ClassName} {
+
+    *new { | ${2:arga, argb, argc} |
+        ^super.new.init($2)
+    }
+
+    init { | $2 |
+    }
+	
+}
+]];
+
+Snippets["unit"] = [[${1:TestYourClass} : UnitTest {
+    setUp {
+        // this will be called before each test
+		${2:}
+    }
+    tearDown {
+        // this will be called after each test
+		${3:}
+    }
+
+    test_yourMethod {
+        // every method whose name begins with "test_" will be run
+		${4: this.assert( 6 == 6, "6 should equal 6"); } 
+	}
+}
+
+]]
+
 return Snippets
