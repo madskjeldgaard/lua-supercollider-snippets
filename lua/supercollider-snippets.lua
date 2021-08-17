@@ -93,6 +93,8 @@ local snippets = {
 	switch = scsnips.switch;
 	sw = scsnips.switch;
 
+	case = scsnips.case;
+
 }
 
 return snippets
