@@ -218,4 +218,10 @@ Snippets["switch"] = [[switch (${1:z},
 );
 ]]
 
+Snippets["case"] = [[case
+    { ${1: i == 1} } { ${2: \no} }
+    { ${3: i == 1} } { ${4: \no} } 
+	{ ${5: i == 1} } { ${6: \no} };
+]]
+
 return Snippets
