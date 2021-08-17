@@ -90,6 +90,9 @@ local snippets = {
 	unit = scsnips.unit;
 	unittest = scsnips.unit;
 
+	switch = scsnips.switch;
+	sw = scsnips.switch;
+
 }
 
 return snippets
