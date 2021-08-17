@@ -212,9 +212,9 @@ Snippets.unit = [[${1:TestYourClass} : UnitTest {
 ]];
 
 Snippets["switch"] = [[switch (${1:z},
-    ${2:1},   { ${3:\no} },
-    ${4:1},   { ${5:\no} },
-	${6:1},   { ${7:\no} },
+    ${2:1}, { ${3:\no} },
+    ${4:1}, { ${5:\no} },
+	${6:1}, { ${7:\no} },
 );
 ]]
 
